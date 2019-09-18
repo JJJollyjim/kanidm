@@ -1,0 +1,29 @@
+name: Check formatting
+
+on:
+  push:
+    branches:
+      - master
+  pull_request: []
+
+jobs:
+  rustfmt:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Check formatting
+      run: cargo fmt -- --check
+
+      # I would rather suggest changes to the pull request than push a new commit, but this isn't currently exposed in the API :(
+    - name: Push reformatted code
+      if: failure()
+      run: |
+       cargo fmt
+
+       git config --global user.name 'rustfmt'
+       git config --global user.email '${GITHUB_ACTOR}@users.noreply.github.com'
+
+       git add -A
+       git commit -m 'Fix formatting'
+       git push -u origin HEAD
