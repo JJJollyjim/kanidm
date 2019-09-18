@@ -1,7 +1,7 @@
 extern crate structopt;
 use kanidm_client::KanidmClient;
 use std::path::PathBuf;
-use structopt::StructOpt;
+ use structopt::{StructOpt};
 extern crate env_logger;
 #[macro_use]
 extern crate log;
