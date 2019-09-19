@@ -7,7 +7,7 @@ edition = "2018"
 [dependencies]
 log = "0.4"
 env_logger = "0.6"
-reqwest = "0.9"
+reqwest = { version = "0.9", default-features = true, features = ["rustls-tls"] }
 kanidm_proto = { path = "../kanidm_proto" }
 serde_json = "1.0"
 
